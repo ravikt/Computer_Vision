@@ -5,8 +5,8 @@ function [output] = nonmaxsupress(g, theta)
 [m,n]=size(g);
 output=zeros(m,n);
 
-for i=2:m
-   for j=2:n
+for i=2:m-1
+   for j=2:n-1
        switch theta(i,j)
            case 0
                if (g(i,j) >= g(i-1,j)) && ((g(i,j) >= g(i+1,j)))

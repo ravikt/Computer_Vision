@@ -15,3 +15,4 @@ g    = hypot(gx,gy);
 theta= atan2d(gy,gx);
 
 theta_new = roundtheta(theta);
+final_image=nonmaxsupress(g,theta);
