@@ -3,7 +3,11 @@ function [image1] = operation(image,filter)
 [m,n]=size(filter);
 m=(m-1)/2;
 n=(n-1)/2;
-input_image=rgb2gray(image);
+if numel(size(image)) == 3
+   input_image = rgb2gray(image);
+else
+   input_image = image;
+end
 image=padarray(input_image,[m,n]);
 image=double(image);
 [r,c]=size(image);
