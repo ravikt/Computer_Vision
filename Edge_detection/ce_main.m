@@ -1,3 +1,4 @@
+function ce_main
 clear all;
 close all;
 image=imread('image.jpg');
@@ -14,5 +15,7 @@ gy   = operation(answ,sobely);
 g    = hypot(gx,gy);
 theta= atan2d(gy,gx);
 
-theta_new = roundtheta(theta);
-final_image=nonmaxsupress(g,theta);
+c = roundtheta(theta);
+final_image=nonmaxsupress(g,c);
+
+end
