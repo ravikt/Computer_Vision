@@ -4,7 +4,7 @@ function [ gh,gl ] = thresh( g )
 [m,n]=size(g);
 gh=zeros(m,n);
 gl=zeros(m,n);
-l = 0.3*min(min(g));
+l = 0.3*max(max(g));
 h = 0.7*max(max(g));
 
 for i=1:m
