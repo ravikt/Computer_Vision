@@ -17,4 +17,4 @@ theta= atan2d(gy,gx);
 
 c = roundtheta(theta);
 final_image=nonmaxsupress(g,c);
-
+[th, tl] = thresh(g);
