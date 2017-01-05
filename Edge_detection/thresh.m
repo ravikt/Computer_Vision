@@ -1,11 +1,11 @@
-function [ gh,gl ] = thresh( g )
+function [gh,gl] = thresh(g)
 % THRESH 
 % function for double thresholding
 [m,n]=size(g);
 gh=zeros(m,n);
 gl=zeros(m,n);
-l = 0.3*max(max(g));
-h = 0.7*max(max(g));
+l = 0.2*max(max(g));
+h = 0.4*max(max(g));
 
 for i=1:m
    for j=1:n
