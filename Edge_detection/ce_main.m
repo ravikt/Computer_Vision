@@ -14,7 +14,12 @@ gx   = operation(answ,sobelx);
 gy   = operation(answ,sobely);
 g    = hypot(gx,gy);
 theta= atan2d(gy,gx);
-
 c = roundtheta(theta);
+
+% Appplying nonmaximum supression
+
 final_image=nonmaxsupress(g,c);
+
+% Hysteresis thresholding
 [th, tl] = thresh(g);
+x=hyster( th, tl);
