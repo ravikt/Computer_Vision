@@ -23,3 +23,15 @@ final_image=nonmaxsupress(g,c);
 % Hysteresis thresholding
 [th, tl] = thresh(g);
 x=hyster( th, tl);
+
+figure;
+imshow(image);
+title('Original image');
+
+figure;
+imshow(final_image,[]);
+title('After applying non maximum supression');
+
+figure;
+imshow(x);
+title('After applying Canny edge detection algorithm');
