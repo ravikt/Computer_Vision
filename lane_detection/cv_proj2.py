@@ -4,8 +4,8 @@ import numpy as np
 import skvideo.io
 import skvideo.utils
 import skvideo.datasets
-#videogen = skvideo.io.vread('lane_vid.mp4')
-videogen = skvideo.io.vreader('lane_vid.mp4')
+#inVideo = skvideo.io.vread('lane_vid.mp4')
+inVideo = skvideo.io.vreader('lane_vid.mp4')
 #video = skvideo.utils.rgb2gray('lane_vid.mp4')
 
 
@@ -17,20 +17,20 @@ def operation(im):
 
 # outputdata = np.random.random(size=(500, 360, 490, 1)) * 255
 # outputdata = outputdata.astype(np.uint8)
-outputdata = np.empty((5291, 360, 490))
-outputdata = outputdata.astype(np.uint8)
+outVideo = np.empty((5291, 360, 490))
+outVideo = outVideo.astype(np.uint8)
 i = 0
-for frame in videogen:
+for frame in inVideo:
         print(frame.shape)
 
-        outputdata[i] = operation(frame)
+        outVideo[i] = operation(frame)
         i = i+1;
 
 #plt.imshow(frame)
 #plt.imshow(output)
 #plt.show()
 
-skvideo.io.vwrite("outputvideo.mp4", outputdata)
+skvideo.io.vwrite("outputvideo.mp4", outVideo)
 
 
 # def operation(base_img):
@@ -51,3 +51,4 @@ skvideo.io.vwrite("outputvideo.mp4", outputdata)
 #         )
 #     )
 #     image = hough_lines(image, 1, np.pi / 90, 10, 15, 10)
+
