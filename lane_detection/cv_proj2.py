@@ -33,22 +33,5 @@ for frame in inVideo:
 skvideo.io.vwrite("outputvideo.mp4", outVideo)
 
 
-# def operation(base_img):
-#     global BASE_IMG, CANNY_IMG
-#     BASE_IMG = base_img
-#     ysize = base_img.shape[0]
-#     xsize = base_img.shape[1]
-#     image = to_hsv(base_img)
-#     image = gaussian_blur(image, 3)
-#     image = filter_color(image)
-#     image = canny(image, 30, 130)
-#     CANNY_IMG = image
-#     image = region_of_interest(
-#         image,
-#         np.array(
-#             [[(40, ysize), (xsize / 2, ysize / 2 + 40), (xsize / 2, ysize / 2 + 40), (xsize - 40, ysize)]],
-#             dtype=np.int32
-#         )
-#     )
-#     image = hough_lines(image, 1, np.pi / 90, 10, 15, 10)
+
 
