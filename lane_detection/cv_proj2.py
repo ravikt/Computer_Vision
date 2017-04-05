@@ -8,16 +8,24 @@ import skvideo.datasets
 videogen = skvideo.io.vreader('lane_vid.mp4')
 #video = skvideo.utils.rgb2gray('lane_vid.mp4')
 
-
+# outputdata = np.random.random(size=(500, 360, 490, 1)) * 255
+# outputdata = outputdata.astype(np.uint8)
+outputdata = np.empty((5291, 360, 490))
+outputdata = outputdata.astype(np.uint8)
+i = 0
 for frame in videogen:
         print(frame.shape)
         # image_processing(frame)
-        output = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
-        
+        gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
+        edges = cv2.Canny(gray, 100, 200)
+        outputdata[i] = edges
+        i = i+1;
 
 #plt.imshow(frame)
-plt.imshow(output)
-plt.show()
+#plt.imshow(output)
+#plt.show()
+
+skvideo.io.vwrite("outputvideo.mp4", outputdata)
 
 
 # def operation(base_img):
