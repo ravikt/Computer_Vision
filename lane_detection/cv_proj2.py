@@ -41,4 +41,11 @@ for frame in inVideo:
 skvideo.io.vwrite("outputvideo1.mp4", outVideo)
 
 
+<<<<<<< HEAD
+=======
+skvideo.io.vwrite("outputvideo.mp4", outVideo)
+
+
+
+>>>>>>> c2e3acc80308761eec9f84a485317bae71406acb
 
