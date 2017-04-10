@@ -8,11 +8,20 @@ import skvideo.datasets
 inVideo = skvideo.io.vreader('lane_vid.mp4')
 #video = skvideo.utils.rgb2gray('lane_vid.mp4')
 
+def conversion(im):
+        outimage = cv2.cvtColor(im, cv2.COLOR_RGB2GRAY)
+        #outimage = cv2.cvtColor(im, cv2.COLOR_RGB2HSV)
+        return outimage
+
+def canny(im):
+        incanny = cv2.GaussianBlur(im, (5, 5), 0)
+        outimage =  cv2.Canny(incanny, 100, 200)
+        return outimage
 
 def operation(im):
         inimage = im
-        gray = cv2.cvtColor(inimage, cv2.COLOR_RGB2GRAY)
-        outimage = cv2.Canny(gray, 100, 200)
+        gray = conversion(inimage)
+        outimage = canny(gray)
         return outimage
 
 # outputdata = np.random.random(size=(500, 360, 490, 1)) * 255
@@ -20,35 +29,16 @@ def operation(im):
 outVideo = np.empty((5291, 360, 490))
 outVideo = outVideo.astype(np.uint8)
 i = 0
+
 for frame in inVideo:
-        print(frame.shape)
+        #print(frame.shape)
 
         outVideo[i] = operation(frame)
         i = i+1;
-
 #plt.imshow(frame)
 #plt.imshow(output)
 #plt.show()
+skvideo.io.vwrite("outputvideo1.mp4", outVideo)
 
-skvideo.io.vwrite("outputvideo.mp4", outVideo)
 
-
-# def operation(base_img):
-#     global BASE_IMG, CANNY_IMG
-#     BASE_IMG = base_img
-#     ysize = base_img.shape[0]
-#     xsize = base_img.shape[1]
-#     image = to_hsv(base_img)
-#     image = gaussian_blur(image, 3)
-#     image = filter_color(image)
-#     image = canny(image, 30, 130)
-#     CANNY_IMG = image
-#     image = region_of_interest(
-#         image,
-#         np.array(
-#             [[(40, ysize), (xsize / 2, ysize / 2 + 40), (xsize / 2, ysize / 2 + 40), (xsize - 40, ysize)]],
-#             dtype=np.int32
-#         )
-#     )
-#     image = hough_lines(image, 1, np.pi / 90, 10, 15, 10)
 
