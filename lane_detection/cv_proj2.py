@@ -9,9 +9,15 @@ inVideo = skvideo.io.vreader('lane_vid.mp4')
 #video = skvideo.utils.rgb2gray('lane_vid.mp4')
 
 # def regint(im):
-#         [m, n] = im.shape
-#         mask = np.zeros((m, n), dtype=np.uint8);
-
+#         [m, n, k] = im.shape
+#         mask = np.zeros((m, n, k), dtype=np.uint8);
+#         i=m/2
+#         while i >= m/2:
+#            mask[i, :, :] = im[i, :, :]
+#            i = i+1
+#            if i == m:
+#              break;
+#         return mask;
 
 def conversion(im):
         outimage = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
@@ -20,16 +26,14 @@ def conversion(im):
 
 def canny(im):
         incanny = cv2.GaussianBlur(im, (5, 5), 0)
-        outimage = cv2.Canny(incanny, 100, 200)
+        outimage = cv2.Canny(incanny, 30, 130)
         return outimage
 
 def draw(img, lines):
-
-  if lines is not None:
-      for line in lines:
-        x1, y1, x2, y2 = line[0]
-      cv2.line(img, (x1, y1), (x2, y2), (0, 0, 255, 2)
-
+      if lines is not None:
+        for line in lines:
+         x1, y1, x2, y2 = line[0]
+        cv2.line(img, (x1, y1), (x2, y2), (255, 0, 0), 5)
 
 def hough(img):
         lines = cv2.HoughLinesP(img, 1, np.pi/180, 100, minLineLength=100, maxLineGap=10)
@@ -43,11 +47,12 @@ def blendim(img1, img2):
 
 def operation(im):
         inimage = im
+        #inimage = regint(im)
         gray = conversion(inimage)
         edge = canny(gray)
         outimage = hough(edge)
         #outimage = conversion(outimage)
-        outimage = blendim(outimage, inimage)
+        outimage = blendim(outimage, im)
         return outimage
 
 outVideo = np.empty([5291, 360, 490, 3], dtype = np.uint8)
@@ -65,5 +70,6 @@ for frame in inVideo:
 #plt.imshow(output)
 #plt.show()
 skvideo.io.vwrite("outputvideo1.mp4", outVideo)
+
 
 
